@@ -1,0 +1,42 @@
+/* Write your CSS code here */
+.logo-image {
+  width: 110px;
+}
+.nav-header {
+  display: flex;
+  justify-content: center;
+}
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  max-width: 1110px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+.nav-menu {
+  display: flex;
+  list-style-type: none;
+  justify-content: flex-end;
+  align-self: flex-end;
+  flex: 1;
+  list-style-type: none;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: 'Roboto';
+  color: #64748b;
+}
+.list-item {
+  margin-right: 9px;
+}
+.button {
+  margin-left: 15px;
+  background-color: #0b69ff;
+  color: white;
+  font-family: 'Roboto';
+  border-width: 0px;
+  height: 29px;
+  width: 110px;
+  border-radius: 5px;
+}
