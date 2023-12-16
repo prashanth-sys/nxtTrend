@@ -4,17 +4,25 @@ import {Component} from 'react'
 import './index.css'
 
 class LoginForm extends Component {
-  state = {username: '', password: '', errorMessage: ''}
+  state = {
+    username: '',
+    password: '',
+    errorMessage: '',
+    showSubmitError: false,
+  }
 
   onSubmitSuccess = () => {
     const {history} = this.props
     history.replace('/')
   }
 
+  onSubmitFailure = errorMsg => {
+    this.setState({showSubmitError: true, errorMessage: errorMsg})
+  }
+
   submitForm = async event => {
     event.preventDefault()
     const {username, password} = this.state
-
     const userDetails = {username, password}
     const url = 'https://apis.ccbp.in/login'
     const options = {
@@ -26,15 +34,13 @@ class LoginForm extends Component {
     console.log(data)
     if (response.ok === true) {
       this.onSubmitSuccess()
-    } else if (event === '') {
-      this.setState({
-        errorMessage: 'Unknown error occurred',
-      })
+    } else {
+      this.onSubmitFailure(data.error_msg)
     }
   }
 
   renderPasswordField = () => {
-    const {password, errorMessage} = this.state
+    const {password} = this.state
     return (
       <>
         <label className="label-input" htmlFor="password">
@@ -48,13 +54,12 @@ class LoginForm extends Component {
           onChange={this.onChangePassword}
           placeholder="Password"
         />
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
       </>
     )
   }
 
   renderUsernameField = () => {
-    const {username, errorMessage} = this.state
+    const {username} = this.state
     return (
       <>
         <label className="label-input" htmlFor="username">
@@ -68,7 +73,6 @@ class LoginForm extends Component {
           onChange={this.onChangeUsername}
           placeholder="Username"
         />
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
       </>
     )
   }
@@ -82,6 +86,7 @@ class LoginForm extends Component {
   }
 
   render() {
+    const {showSubmitError, errorMessage} = this.state
     return (
       <div className="login-form-container">
         <img
@@ -107,6 +112,7 @@ class LoginForm extends Component {
           <button type="submit" className="login-button">
             Login
           </button>
+          {showSubmitError && <p className="error-message">*{errorMessage}</p>}
         </form>
       </div>
     )

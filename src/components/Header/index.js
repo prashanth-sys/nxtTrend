@@ -6,7 +6,7 @@ const Header = () => (
     <div className="nav-content">
       <img
         src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-logo-img.png"
-        alt="shiva paravathi"
+        alt="website logo"
         className="logo-image"
       />
       <ul className="nav-menu">
